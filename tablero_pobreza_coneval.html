@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de gráficos - Pobreza en México 2008-2018</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <style>
+    body {font-family: Arial, sans-serif; margin: 0; background: #f5f7fa; color: #222;}
+    header {background:#006d77; color:white; padding:24px 32px;}
+    header h1 {margin:0; font-size:28px;} header p{margin:6px 0 0 0;}
+    main {padding:24px; max-width: 1200px; margin:auto;}
+    .grid {display:grid; grid-template-columns: repeat(auto-fit, minmax(520px, 1fr)); gap:20px;}
+    .card {background:white; border-radius:14px; padding:16px; box-shadow: 0 2px 10px rgba(0,0,0,.08);}
+    .chart {width: 100%; height: 380px;}
+    table {border-collapse: collapse; width:100%; font-size: 13px; margin-top: 10px;}
+    th, td {border:1px solid #ddd; padding:7px;} th{background:#e0f2f1;}
+    footer {padding:20px 32px; color:#555; font-size:13px;}
+  </style>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawCharts);
+    function drawCharts() {
+      var data1 = google.visualization.arrayToDataTable([
+        ['Año', 'Millones de personas'],
+        [2008, 49.489], [2010, 52.813], [2012, 53.350], [2014, 55.342], [2016, 53.418], [2018, 52.426]
+      ]);
+      new google.visualization.LineChart(document.getElementById('chart1')).draw(data1, {title:'Personas en situación de pobreza', legend:{position:'none'}, hAxis:{title:'Año'}, vAxis:{title:'Millones'}});
+
+      var data2 = google.visualization.arrayToDataTable([
+        ['Año', 'Pobreza (%)'], [2008,44.4], [2010,46.1], [2012,45.5], [2014,46.2], [2016,43.6], [2018,41.9]
+      ]);
+      new google.visualization.AreaChart(document.getElementById('chart2')).draw(data2, {title:'Porcentaje de población en pobreza', legend:{position:'none'}, hAxis:{title:'Año'}, vAxis:{title:'Porcentaje', viewWindow:{min:35,max:50}}});
+
+      var data3 = google.visualization.arrayToDataTable([
+        ['Carencia', '2008', '2018'], ['Rezago educativo',21.9,16.9], ['Servicios de salud',38.4,16.2], ['Seguridad social',65.0,57.3], ['Calidad vivienda',17.7,11.1], ['Servicios básicos vivienda',22.9,19.8], ['Alimentación',21.7,20.4]
+      ]);
+      new google.visualization.ColumnChart(document.getElementById('chart3')).draw(data3, {title:'Carencias sociales 2008 vs 2018', hAxis:{slantedText:true}, vAxis:{title:'Porcentaje'}, legend:{position:'top'}});
+
+      var data4 = google.visualization.arrayToDataTable([
+        ['Indicador', '2008', '2018'], ['Ingreso inferior a LPEI (%)',16.8,16.8], ['Ingreso inferior a LPEI (millones)',18.7,21.0], ['Ingreso inferior a LPI (%)',49.0,48.8], ['Ingreso inferior a LPI (millones)',54.7,61.1]
+      ]);
+      new google.visualization.BarChart(document.getElementById('chart4')).draw(data4, {title:'Indicadores por ingresos', hAxis:{title:'Valor'}, legend:{position:'top'}});
+
+      var data5 = google.visualization.arrayToDataTable([
+        ['Año base (%)', '2018 (%)', {type:'string', role:'tooltip'}],
+        [62.5,55.3,'Rural'], [38.9,37.6,'Urbana'], [76.0,74.9,'Hablante lengua indígena'], [41.4,39.4,'No hablante lengua indígena'], [44.6,42.4,'Mujeres'], [44.0,41.4,'Hombres'], [53.3,49.6,'Menores de 18 años'], [43.0,42.4,'12 a 29 años'], [44.9,41.1,'65 años o más'], [50.2,48.6,'Discapacidad']
+      ]);
+      new google.visualization.ScatterChart(document.getElementById('chart5')).draw(data5, {title:'Brechas sociales: año base vs 2018', hAxis:{title:'Año base'}, vAxis:{title:'2018'}, legend:'none'});
+    }
+  </script>
+</head>
+<body>
+<header><h1>Panel de gráficos: pobreza en México 2008-2018</h1><p>Datos preparados a partir del comunicado de CONEVAL (2019). Tablero elaborado con Google Charts.</p></header>
+<main><div class="grid">
+<div class="card"><div id="chart1" class="chart"></div></div><div class="card"><div id="chart2" class="chart"></div></div><div class="card"><div id="chart3" class="chart"></div></div><div class="card"><div id="chart4" class="chart"></div></div><div class="card"><div id="chart5" class="chart"></div></div>
+</div></main><footer>Fuente: CONEVAL (2019). 10 años de medición de pobreza en México, avances y retos en política social.</footer>
+</body></html>
